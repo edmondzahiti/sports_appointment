@@ -65,6 +65,13 @@
                             </div>
                         </div>
                     </form>
+                    <br><div class="form-group row">
+                        <div class="col-md-6 offset-md-4">
+                            <span><b>credentials for testing</b></span><br>
+                            <span>email: admin@admin.com - password: admin123</span><br>
+                            <span>email: user@user.com - password: user123</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

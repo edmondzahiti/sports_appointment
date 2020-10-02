@@ -9,37 +9,34 @@
 
 @push('afterStylesheets')
     <style>
-        .slider{
-            background-color: #55BDBD;
-        }
-        .carousel-control-next-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='grey' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
-        }
-
-        .carousel-control-prev-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='grey' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+        .video-container {
+            overflow: hidden;
+            position: relative;
+            width:100%;
         }
 
-        .pagingInfo{
-            float: right;
-            margin-right: 50px;
-            font-weight: bold;
-            font-size: 25px;
-            margin-top: -7px;
-            color: grey;
-        }
-        .step{
-            font-weight: bold;
-            font-size: 25px;
-            color: grey;
+        .video-container::after {
+            padding-top: 56.25%;
+            display: block;
+            content: '';
         }
 
-        .tutorial{
-            font-weight: bold;
-            font-size: 25px;
-            color: #55BDBD;
-            margin-left: 10px;
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
+
+        .links{
+            color: white !important;
+        }
+
+        .links:hover{
+            color: black !important;
+        }
+
     </style>
 @endpush
 @section('content')
@@ -48,21 +45,35 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8">
-                    <iframe width="1070" height="615" src="https://www.youtube.com/embed/BLirXR7mkDM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/BLirXR7mkDM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <div class="row">
                         <ul class="nav nav-pills dashboard-items flex-column mt-3">
                             <li class="nav-item has-treeview ">
-                                <a href="" class="btn btn-success button-sizes text-uppercase text-left  nav-link">
-                                        <i class="nav-icon fa fa-plus icons  mr-3" aria-hidden="true"></i>
+                                <a href="{{route('users.index')}}" class="btn btn-success text-uppercase text-left  nav-link links">
+                                        <i class="nav-icon fa fa-plus icons mr-3" aria-hidden="true"></i>
                                         Users
                                 </a>
                             </li>
                             <li class="nav-item mt-2">
-                                <a href="" class="btn btn-info button-sizes text-uppercase text-left  nav-link">
+                                <a href="{{route('fields.index')}}" class="btn btn-info text-uppercase text-left  nav-link links">
                                         <i class="nav-icon fas fa-list-ol  mr-3" aria-hidden="true"></i>
-                                        Appointments
+                                        Fields
+                                </a>
+                            </li>
+                            <li class="nav-item mt-2">
+                                <a href="{{route('events.index')}}" class="btn btn-danger text-uppercase text-left  nav-link links">
+                                    <i class="nav-icon fas fa-list-ol  mr-3" aria-hidden="true"></i>
+                                    All Events
+                                </a>
+                            </li>
+                            <li class="nav-item mt-2">
+                                <a href="{{route('events.calendar')}}" class="btn btn-dark text-uppercase text-left  nav-link links">
+                                    <i class="nav-icon fas fa-list-ol  mr-3" aria-hidden="true"></i>
+                                    Events Calendar
                                 </a>
                             </li>
                         </ul>
