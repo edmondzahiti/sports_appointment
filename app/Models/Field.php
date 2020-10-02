@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Field extends Model
 {
 
+    public $primaryKey = 'id';
+
     protected $fillable = [
         'name',
         'capacity',
