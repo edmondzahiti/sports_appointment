@@ -11,6 +11,7 @@ class Event extends Model
 {
     use SoftDeletes;
 
+    public $primaryKey = 'id';
     public $table = 'events';
 
     protected $dates = [

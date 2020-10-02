@@ -23,6 +23,9 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
+
+    public $primaryKey = 'id';
+
     protected $guarded = [
         'id',
     ];

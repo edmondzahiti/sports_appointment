@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="353dc4aa-b0c3-489a-be33-bf38326a99c0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FieldController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FieldController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Event.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User/User.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -207,7 +207,7 @@
       <workItem from="1601568806652" duration="639000" />
       <workItem from="1601628779990" duration="830000" />
       <workItem from="1601643756478" duration="1308000" />
-      <workItem from="1601645637092" duration="5435000" />
+      <workItem from="1601645637092" duration="5692000" />
     </task>
     <task id="LOCAL-00001" summary="added procfile">
       <created>1601645731794</created>
@@ -244,7 +244,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601655014916</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="small fix">
+      <created>1601655381758</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1601655381758</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
