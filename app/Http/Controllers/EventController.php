@@ -114,7 +114,7 @@ class EventController extends Controller
         $day = date('d', strtotime($request->date));
 
 
-        if (now()->month > $month) {
+        if (now() > $request->date) {
             return response()->json('failed');
         }else{
 
