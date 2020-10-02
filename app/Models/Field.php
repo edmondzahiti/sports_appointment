@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Field extends Model
 {
 
-    protected $guarded = [
-        'id',
+    protected $fillable = [
+        'name',
+        'capacity',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
 
