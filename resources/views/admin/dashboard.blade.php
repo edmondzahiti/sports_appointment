@@ -100,23 +100,11 @@
                 @if (!auth()->user()->isAdmin())
                     <div class="col-md-3">
                         <div class="row">
-                            <ul class="nav nav-pills dashboard-items flex-column mt-3">
-                                    <li class="nav-item has-treeview ">
-                                        <a href="{{route('users.index')}}" class="btn btn-success text-uppercase text-left  nav-link links">
-                                                <i class="nav-icon fa fa-plus icons mr-3" aria-hidden="true"></i>
-                                                Users
-                                        </a>
-                                    </li>
-                                    <li class="nav-item mt-2">
-                                        <a href="{{route('fields.index')}}" class="btn btn-info text-uppercase text-left  nav-link links">
-                                                <i class="nav-icon fas fa-list-ol  mr-3" aria-hidden="true"></i>
-                                                Fields
-                                        </a>
-                                    </li>
+                            <ul class="nav nav-pills dashboard-items flex-column">
                                 <li class="nav-item mt-2">
                                     <a href="{{route('events.index')}}" class="btn btn-danger text-uppercase text-left  nav-link links">
                                         <i class="nav-icon fas fa-list-ol  mr-3" aria-hidden="true"></i>
-                                        All Events
+                                        My Events
                                     </a>
                                 </li>
                                 <li class="nav-item mt-2">
