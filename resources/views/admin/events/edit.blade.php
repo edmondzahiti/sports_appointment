@@ -8,94 +8,106 @@
 
 
 @section('content')
-    <form method="POST" action="{{ route('events.update', $event) }}">
-        @csrf
-        @method('PUT')
-
+    @if($date > $event->start_time)
         <div class="card">
             <div class="card-body">
 
                 <div class="form-group row mb-4">
                     <div class="col-12">
-                        <h3 class="card-title font-weight-bold">{{ __('Event Data') }}</h3>
+                        <h3 class="card-title font-weight-bold bg-red">You can't edit past events</h3>
                     </div>
                 </div>
-
-                <div class="form-group row mb-2">
-                    <div class="col-xl-3 col-lg-4 mb-2 {{ $errors->has('name') ? ' has-error' : '' }}">
-                        <input id="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}"
-                               name="name" value="{{ old('name', $event->name) }}" required autocomplete="name" disabled
-                               autofocus placeholder="{{ __('Name') }}" maxlength="64">
-                        @if ($errors->has('name'))
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('name') }}</strong>
-                        </span>
-                        @endif
-                    </div>
-                </div>
-                <h5>Field</h5>
-                <div class="form-group row mb-2">
-                    <div class="col-xl-6 col-lg-8 mb-2 {{ $errors->has('month') ? ' has-error' : '' }}">
-                        <select class="form-control field" name="field" id="field">
-                            <option value="" selected disabled>Select Field</option>
-                            @foreach($fields as $field)
-                                <option value="{{$field->id}}"{{$field->id == $event->field_id ? 'selected' : ''}}>{{$field->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <h5>Month</h5>
-                <div class="form-group row mb-2">
-                    <div class="col-xl-6 col-lg-8 mb-2 {{ $errors->has('month') ? ' has-error' : '' }}">
-                        <select class="form-control month" name="month" id="month">
-                            <option value="" selected>Select Month</option>
-                            @foreach($months as $key => $value)
-                                <option value="{{$key}}">{{$value}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <h5>Day date</h5>
-                <div class="form-group row mb-2">
-                    <div class="col-xl-6 col-lg-8 mb-2 {{ $errors->has('day') ? ' has-error' : '' }}">
-                        <select class="form-control day" name="day" id="day">
-{{--                            <option value="" selected>Select Day</option>--}}
-                        </select>
-                    </div>
-                </div>
-                <h5>Time</h5>
-                <div class="form-group row mb-2">
-                    <div class="col-xl-6 col-lg-8 mb-2 {{ $errors->has('date') ? ' has-error' : '' }}">
-                        <select class="form-control date" name="date" id="date">
-{{--                            <option value="" selected>Select Time</option>--}}
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row mb-2">
-                    <div class="col-xl-6 col-lg-8 mb-2 {{ $errors->has('date') ? ' has-error' : '' }}">
-                        @if($errors->any())
-                            <ul class="alert alert-danger">
-                                @foreach ($errors->all() as $error)
-                                    <li >{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
-
-                    </div>
-                </div>
-            </div>
-            <input name="isEditingEvent" id="isEditingEvent" type="hidden" value="{{true}}">
-        </div><!--card-->
-{{--        <a href="{{ route('events.index') }}" class="btn btn-default btn-flat btn-gray">@lang('Back')</a><br><br>--}}
-        <button type="submit" class="btn btn-info ml-2">{{ __('Update') }}</button><br><br>
-    </form>
-    <div >
-        <form action="{{ route('events.destroy', ['event' => $event]) }}" method="POST">
+            </div><!--card-->
+    @else
+        <form method="POST" action="{{ route('events.update', $event) }}">
             @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-info btn-danger ml-2" onclick="return confirm('Are you sure?')">Delete</button>
+            @method('PUT')
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="form-group row mb-4">
+                        <div class="col-12">
+                            <h3 class="card-title font-weight-bold">{{ __('Event Data') }}</h3>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2">
+                        <div class="col-xl-3 col-lg-4 mb-2 {{ $errors->has('name') ? ' has-error' : '' }}">
+                            <input id="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}"
+                                   name="name" value="{{ old('name', $event->name) }}" required autocomplete="name" disabled
+                                   autofocus placeholder="{{ __('Name') }}" maxlength="64">
+                            @if ($errors->has('name'))
+                                <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('name') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    <h5>Field</h5>
+                    <div class="form-group row mb-2">
+                        <div class="col-xl-6 col-lg-8 mb-2 {{ $errors->has('month') ? ' has-error' : '' }}">
+                            <select class="form-control field" name="field" id="field">
+                                <option value="" selected disabled>Select Field</option>
+                                @foreach($fields as $field)
+                                    <option value="{{$field->id}}"{{$field->id == $event->field_id ? 'selected' : ''}}>{{$field->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <h5>Month</h5>
+                    <div class="form-group row mb-2">
+                        <div class="col-xl-6 col-lg-8 mb-2 {{ $errors->has('month') ? ' has-error' : '' }}">
+                            <select class="form-control month" name="month" id="month">
+                                <option value="" selected>Select Month</option>
+                                @foreach($months as $key => $value)
+                                    <option value="{{$key}}">{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <h5>Day date</h5>
+                    <div class="form-group row mb-2">
+                        <div class="col-xl-6 col-lg-8 mb-2 {{ $errors->has('day') ? ' has-error' : '' }}">
+                            <select class="form-control day" name="day" id="day">
+    {{--                            <option value="" selected>Select Day</option>--}}
+                            </select>
+                        </div>
+                    </div>
+                    <h5>Time</h5>
+                    <div class="form-group row mb-2">
+                        <div class="col-xl-6 col-lg-8 mb-2 {{ $errors->has('date') ? ' has-error' : '' }}">
+                            <select class="form-control date" name="date" id="date">
+    {{--                            <option value="" selected>Select Time</option>--}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col-xl-6 col-lg-8 mb-2 {{ $errors->has('date') ? ' has-error' : '' }}">
+                            @if($errors->any())
+                                <ul class="alert alert-danger">
+                                    @foreach ($errors->all() as $error)
+                                        <li >{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            @endif
+
+                        </div>
+                    </div>
+                </div>
+                <input name="isEditingEvent" id="isEditingEvent" type="hidden" value="{{true}}">
+            </div><!--card-->
+    {{--        <a href="{{ route('events.index') }}" class="btn btn-default btn-flat btn-gray">@lang('Back')</a><br><br>--}}
+            <button type="submit" class="btn btn-info ml-2">{{ __('Update') }}</button><br><br>
         </form>
-    </div>
+        <div >
+            <form action="{{ route('events.destroy', ['event' => $event]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-info btn-danger ml-2" onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+        </div>
+    @endif
 @endsection
 
 

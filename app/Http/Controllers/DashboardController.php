@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+use App\Models\Field;
+use App\Models\User\User;
+
 class DashboardController extends Controller
 {
     public function __construct() {
     }
 
     public function index() {
-        return view('admin.dashboard');
+        $users = User::whereNull('deleted_at')->count();
+        $fields = Field::count();
+        $events = Event::whereNull('deleted_at')->count();
+
+        return view('admin.dashboard', compact('users', 'fields', 'events'));
     }
 }

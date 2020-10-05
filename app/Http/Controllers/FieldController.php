@@ -62,7 +62,7 @@ class FieldController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'alpha', 'max:64'],
+            'name' => ['required', 'string', 'max:64'],
             'capacity' => ['required', 'integer', 'min:0'],
         ]);
 

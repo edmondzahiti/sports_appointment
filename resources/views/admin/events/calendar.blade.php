@@ -55,9 +55,17 @@
                             class="sr-only">close</span></button>
                 </div>
                 <div id="modalBody" class="modal-body">
-                    <select class="form-control events" name="events" id="events">
+                    <select class="form-control events" name="events" id="events" required="required">
 
-                    </select>
+                    </select><br>
+                    @if (auth()->user()->isAdmin())
+                        Select User:
+                        <select class="form-control" name="user" id="user">
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name}}</option>
+                            @endforeach
+                        </select>
+                    @endif
                 </div>
                 <input type="hidden" id="date" name="date">
                 <div class="modal-footer">
@@ -122,6 +130,7 @@
             event.preventDefault();
 
             var field_id = $("#field_id").find(':selected').val();
+            var user = $("#user").find(':selected').val();
             var hour = $(".events").find(':selected').val();
             var date = $("#date").val();
             $.ajax({
@@ -134,7 +143,8 @@
                     method: 'POST',
                     hour: hour,
                     date: date,
-                    field_id: field_id
+                    field_id: field_id,
+                    user: user
                 },
 
                 beforeSend: function() {
@@ -149,7 +159,7 @@
                     $eventSelectModal.find('.modal-content').unmask();
                 },
                 error: function (data) {
-
+                    alert("You need to fill in all the fields");
                 }
 
             });

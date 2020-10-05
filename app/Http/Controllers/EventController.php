@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use App\Models\Field;
+use App\Models\User\User;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use DateTime;
@@ -68,6 +69,7 @@ class EventController extends Controller
         $events = [];
 
         $fields = Field::all();
+        $users = User::get(['id', 'name']);
 
         foreach ($this->sources as $source) {
             $calendarEvents = $source['model']::when(request('field_id') && $source['model'] == '\App\Models\Event', function($query) {
@@ -104,7 +106,7 @@ class EventController extends Controller
 
 
 
-        return view('admin.events.calendar', compact('events', 'fields'));
+        return view('admin.events.calendar', compact('events', 'fields', 'users'));
     }
 
     public function getFreeEvents(Request $request)
@@ -189,11 +191,20 @@ class EventController extends Controller
 
         $start_time = $date. ' ' . $hour;
 
+        if (auth()->user()->isAdmin())
+        {
+            $user_id = $request->user;
+        }else{
+            $user_id = auth()->user()->id;
+        }
+
+        $user = User::where('id', $user_id)->first();
+
         Event::create([
-            'name' => auth()->user()->name,
+            'name' => $user->name,
             'start_time' => $start_time,
             'field_id'   => $request->field_id,
-            'user_id'   => auth()->user()->id,
+            'user_id'   => $user_id,
         ]);
 
     }
@@ -219,10 +230,10 @@ class EventController extends Controller
     {
         $months = $this->monthListFromDate(Carbon::now());
         $fields = Field::get(['id', 'name']);
-
+        $date = now();
 //        dd($event->start_time->format('y'));
 
-        return view('admin.events.edit', compact('fields','event', 'months'));
+        return view('admin.events.edit', compact('fields','event', 'months', 'date'));
     }
 
     /**
