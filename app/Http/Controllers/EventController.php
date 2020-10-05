@@ -114,7 +114,7 @@ class EventController extends Controller
         $day = date('d', strtotime($request->date));
 
 
-        if (now() > $request->date) {
+        if (now() > $request->date && empty($request->isEditingEvent)) {
             return response()->json('failed');
         }else{
 
@@ -235,10 +235,14 @@ class EventController extends Controller
     public function update(UpdateEventRequest $request, Event $event)
     {
 
+//        dd($request->all());
+
         $date = $request->day;
         $dateformat = DateTime::createFromFormat('m-d-Y', $date)->format('Y-d-m');
         $hour = $request->date.':00:00';
         $start_time = $dateformat. ' ' . $hour;
+
+//        dd($start_time);
 
         Event::where('id', $event->id)->update([
             'start_time' => $start_time,
@@ -281,7 +285,9 @@ class EventController extends Controller
     }
 
     public function dates_month($month, $year) {
-        $num = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+//        $num = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        $num = date('t', mktime(0, 0, 0, $month, 1, $year));
+
         $dates_month = array();
 
         for ($i = 1; $i <= $num; $i++) {

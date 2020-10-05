@@ -86,19 +86,16 @@
             </div>
             <input name="isEditingEvent" id="isEditingEvent" type="hidden" value="{{true}}">
         </div><!--card-->
-
-        <div class="row pb-5 mt-5">
-            <div class="col">
-                <a href="{{ route('events.index') }}" class="btn btn-default btn-flat btn-gray">@lang('Back')</a>
-                <button type="submit" class="btn btn-info ml-2">{{ __('Update') }}</button>
-                <form action="{{ route('events.destroy', ['event' => $event]) }}" method="POST" style="display: none;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-info btn-danger ml-2" onclick="return confirm('Are you sure?')">Delete</button>
-                </form>
-            </div><!--col-->
-        </div><!--row-->
+{{--        <a href="{{ route('events.index') }}" class="btn btn-default btn-flat btn-gray">@lang('Back')</a><br><br>--}}
+        <button type="submit" class="btn btn-info ml-2">{{ __('Update') }}</button><br><br>
     </form>
+    <div >
+        <form action="{{ route('events.destroy', ['event' => $event]) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-info btn-danger ml-2" onclick="return confirm('Are you sure?')">Delete</button>
+        </form>
+    </div>
 @endsection
 
 
