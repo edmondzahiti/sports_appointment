@@ -52,7 +52,7 @@
                     <td style="font-family: 'Source Sans Pro'; font-size: 20px; line-height: 29px; font-weight: 400;
                             letter-spacing: 0;
                             color: #333333;">
-                        Your account has been registered by Sports Appointment Platform Management, now you can login by clicking the bottom below<br>
+                        Your account has been registered by Sports Appointment Platform Management, now you can login by clicking the button below<br>
                         email: {{$user->email}}<br>
                         password: {{$user->name.$user->created_at->format('h:s').$user->surname.$user->created_at->format('i')}}<br>
                     </td>
