@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
-use App\Models\Field;
+use App\Models\Event\Event;
+use App\Models\Field\Field;
 use App\Models\User\User;
 
 class DashboardController extends Controller

@@ -3,36 +3,45 @@
 namespace App\Http\Controllers;
 
 
-use App\Events\Admin\User\UserPasswordChanged;
-use App\Events\Admin\User\UserUpdated;
 use App\Exceptions\GeneralException;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateUserProfileRequest;
-use App\Models\User\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use App\Repositories\Admin\ProfileRepository;
 
 class ProfileController extends Controller
 {
 
-    public function __construct()
-    {
+    protected $profileRepository;
 
+    /**
+     * ProfileController constructor.
+     * @param ProfileRepository $profileRepository
+     */
+    public function __construct(ProfileRepository $profileRepository)
+    {
+        $this->profileRepository = $profileRepository;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit()
     {
         $user = auth()->user();
         return view('admin.users.profile', compact('user'));
     }
 
+    /**
+     * @param UpdateUserProfileRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(UpdateUserProfileRequest $request)
     {
-        $user = auth()->user();
-        $data = $request->only(['name', 'surname', 'email', 'language']);
-
-        $this->updateProfile($user, $data);
-
+        try {
+            $this->profileRepository->update($request->all(), auth()->user()->id);
+        } catch (GeneralException $e) {
+            return $this->errorResponse($e);
+        }
         return redirect()->route('profile')->with([
             'toastr' => json_encode([
                 'type'    => 'success',
@@ -42,38 +51,17 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function updateProfile(User $user, array $data) : User
-    {
-        $this->checkUserByEmail($user, $data['email']);
 
-        return DB::transaction(function () use ($user, $data) {
-            if ($user->update([
-                'name' => $data['name'],
-                'surname' => $data['surname'],
-                'email' => $data['email'],
-            ])) {
-                return $user;
-            }
-
-            throw new GeneralException('error');
-        });
-    }
-
-    protected function checkUserByEmail(User $user, $email)
-    {
-        // Figure out if email is not the same and check to see if email exists
-        if ($user->email !== $email && $this->model->where('email', '=', $email)->first()) {
-            throw new GeneralException('error');
-        }
-    }
-
+    /**
+     * @param UpdatePasswordRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updatePassword(UpdatePasswordRequest $request)
     {
-        $user = auth()->user();
-
         try {
-            $this->checkPassword($user, $request->only('password'));
+            $this->profileRepository->checkPassword(auth()->user, $request->only('password'));
         } catch (GeneralException $e) {
+            return $this->errorResponse($e);
         }
 
         return redirect()->route('home')->with([
@@ -83,16 +71,6 @@ class ProfileController extends Controller
                 'message' => 'Password updated successfully!',
             ])
         ]);
-    }
-
-    public function checkPassword(User $user, array $data) : User
-    {
-        if ($user->update(['password' => Hash::make($data['password'])])) {
-
-            return $user;
-        }
-
-        throw new GeneralException(__('exceptions.backend.access.users.update_password_error'));
     }
 
 }

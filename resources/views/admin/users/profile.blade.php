@@ -17,7 +17,7 @@
     </style>
 @endpush
 {{-- SEO Related Data --}}
-@section('title', __('labels.backend.access.users.management') . ' | ' . __('labels.backend.access.users.edit'))
+@section('title', config('app.name') . ' | ' .'Profile')
 
 @section('content')
 

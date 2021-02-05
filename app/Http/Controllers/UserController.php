@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\Auth\UserRegistered;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Repositories\Admin\UserRepository;
 use DataTables;
-use Illuminate\Http\Request;
 use App\Models\User\User;
-use App\Models\User\SocialIdentity;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
 
-    public function __construct()
-    {
+    protected $userRepository;
 
+    /**
+     * UserController constructor.
+     * @param UserRepository $userRepository
+     */
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -70,21 +72,17 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
+    /**
+     * @param StoreUserRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(StoreUserRequest $request)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'email' => $request->email,
-            'role' => $request->is_admin,
-        ]);
-
-        $user->update([
-            'password' => Hash::make($user->name.$user->created_at->format('h:s').$user->surname.$user->created_at->format('i')),
-            'email_verified_at' => now(),
-        ]);
-
-        event(new UserRegistered($user));
+        try {
+            $this->userRepository->create($request->all());
+        } catch (\Exception $exception) {
+            return $this->errorResponse($exception);
+        }
 
         return redirect()->route('users.index')->with([
             'toastr' => json_encode([
@@ -100,28 +98,13 @@ class UserController extends Controller
         return view('admin.users.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'alpha', 'max:64'],
-            'surname' => ['required', 'string', 'alpha', 'max:64'],
-            'email' => ['required', 'string', 'email', 'max:191', 'unique:users,email,'. $user->id],
-        ]);
-
-        if ($user->email != $request->email)
-        {
-            $user->update([
-                'password' => Hash::make($user->name.$user->created_at->format('h:s').$user->surname.$user->created_at->format('i')),
-                'email' => $request->email,
-            ]);
-            event(new UserRegistered($user));
+        try {
+            $this->userRepository->update($request->all(), $user->id);
+        } catch (\Exception $exception) {
+            return $this->errorResponse($exception);
         }
-
-        $user->update([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'is_admin' => $request->role,
-        ]);
 
         return redirect()->route('users.index')->with([
             'toastr' => json_encode([
@@ -132,9 +115,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
+        try {
+            $this->userRepository->delete($id);
+        } catch (\Exception $exception) {
+            return $this->errorResponse($exception);
+        }
 
         return redirect()->route('users.index')->with([
             'toastr' => json_encode([

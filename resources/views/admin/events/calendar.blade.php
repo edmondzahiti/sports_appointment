@@ -9,7 +9,7 @@
 @endsection
 
 {{-- SEO Related Data --}}
-@section('title', config('app.name') . ' | ' . __('labels.backend.access.users.management'))
+@section('title', config('app.name') . ' | ' . 'Calendar')
 
 {{-- In page title --}}
 {{-- @section('page_title', __('labels.backend.access.users.management')) --}}

@@ -2,28 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\Auth\UserRegistered;
-use App\Models\Field;
-use App\Models\User\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreFieldRequest;
+use App\Http\Requests\UpdateFieldRequest;
+use App\Models\Field\Field;
+use App\Repositories\Admin\FieldRepository;
 use DataTables;
-use Illuminate\Support\Facades\Hash;
 
 class FieldController extends Controller
 {
+
+    protected $fieldRepository;
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * FieldController constructor.
+     * @param FieldRepository $fieldRepository
+     */
+    public function __construct(FieldRepository $fieldRepository)
+    {
+        $this->fieldRepository = $fieldRepository;
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
         return view('admin.fields.index');
     }
 
+    /**
+     * @return mixed
+     */
     public function datatable()
     {
-        $fields = Field::get(['id', 'name', 'capacity', 'created_at']);
+        $fields = $this->fieldRepository->get();
 
         return Datatables::of($fields)
             ->addColumn('name', function ($fields) {
@@ -42,11 +54,8 @@ class FieldController extends Controller
             ->make(true);
     }
 
-
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -54,22 +63,16 @@ class FieldController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreFieldRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreFieldRequest $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:64'],
-            'capacity' => ['required', 'integer', 'min:0'],
-        ]);
-
-        Field::create([
-            'name' => $request->name,
-            'capacity' => $request->capacity,
-        ]);
+        try {
+            $this->fieldRepository->create($request->all());
+        } catch (\Exception $exception) {
+            return $this->errorResponse($exception);
+        }
 
         return redirect()->route('fields.index')->with([
             'toastr' => json_encode([
@@ -81,10 +84,8 @@ class FieldController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Field  $fields
-     * @return \Illuminate\Http\Response
+     * @param Field $field
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Field $field)
     {
@@ -92,23 +93,17 @@ class FieldController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Field  $fields
-     * @return \Illuminate\Http\Response
+     * @param UpdateFieldRequest $request
+     * @param Field $field
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Field $field)
+    public function update(UpdateFieldRequest $request, $id)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'alpha', 'max:64'],
-            'capacity' => ['required', 'integer', 'min:0'],
-        ]);
-
-        $field->update([
-            'name' => $request->name,
-            'capacity' => $request->capacity,
-        ]);
+        try {
+            $this->fieldRepository->update($request->all(), $id);
+        } catch (\Exception $exception) {
+            return $this->errorResponse($exception);
+        }
 
         return redirect()->route('fields.index')->with([
             'toastr' => json_encode([
@@ -120,14 +115,16 @@ class FieldController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Field  $fields
-     * @return \Illuminate\Http\Response
+     * @param Field $field
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Field $field)
+    public function destroy($id)
     {
-        $field->delete();
+        try {
+            $this->fieldRepository->delete($id);
+        } catch (\Exception $exception) {
+            return $this->errorResponse($exception);
+        }
 
         return redirect()->route('fields.index')->with([
             'toastr' => json_encode([

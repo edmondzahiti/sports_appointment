@@ -1,12 +1,17 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Field;
 
-use App\Models\Event;
 use Illuminate\Database\Eloquent\Model;
 
 class Field extends Model
 {
+    use ScopesTrait
+        , MethodTrait
+        , RelationsTrait
+        , MutatorTrait
+        , AccessorTrait
+    ;
 
     public $primaryKey = 'id';
 
@@ -24,8 +29,5 @@ class Field extends Model
         'updated_at' => 'datetime',
     ];
 
-    public function events()
-    {
-        return $this->hasMany(Event::class, 'field_id', 'id');
-    }
+
 }

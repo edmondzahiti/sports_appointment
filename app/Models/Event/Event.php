@@ -1,15 +1,20 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Event;
 
-use App\Models\Field;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Event extends Model
 {
-    use SoftDeletes;
+    use ScopesTrait
+        , MethodTrait
+        , RelationsTrait
+        , MutatorTrait
+        , AccessorTrait
+        , SoftDeletes
+    ;
+
 
     public $primaryKey = 'id';
     public $table = 'events';
@@ -31,14 +36,5 @@ class Event extends Model
         'deleted_at',
     ];
 
-    public function getDateAttribute($value)
-    {
-        return Carbon::createFromFormat('Y-m-d H', $value)->format('m');
-    }
-
-    public function field()
-    {
-        return $this->belongsTo(Field::class, 'field_id');
-    }
 
 }
