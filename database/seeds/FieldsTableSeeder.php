@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\Field;
-
+use App\Models\Field\Field;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 

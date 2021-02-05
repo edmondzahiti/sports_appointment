@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="353dc4aa-b0c3-489a-be33-bf38326a99c0" name="Default Changelist" comment="small fix">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sports_appointment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sports_appointment.iml" afterDir="false" />
+    <list default="true" id="353dc4aa-b0c3-489a-be33-bf38326a99c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/FieldsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/FieldsTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/fields/includes/actions.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/fields/includes/actions.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -223,7 +220,7 @@
       <workItem from="1611940508168" duration="143000" />
       <workItem from="1612177944852" duration="27000" />
       <workItem from="1612451549518" duration="6714000" />
-      <workItem from="1612530839755" duration="17180000" />
+      <workItem from="1612530839755" duration="17983000" />
     </task>
     <task id="LOCAL-00001" summary="added procfile">
       <created>1601645731794</created>
@@ -316,7 +313,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612547299935</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="small fix">
+      <created>1612548217333</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1612548217333</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

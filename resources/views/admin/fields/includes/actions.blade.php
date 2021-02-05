@@ -1,4 +1,4 @@
-<div class="btn-group" role="group" aria-label="@lang('labels.backend.access.users.user_actions')">
+<div class="btn-group" role="group">
     <a href="{{ route('fields.edit', ['field' => $field]) }}" title="@lang('messages.edit')" class="btn">
         <i class="fas fa-edit"></i>
     </a>
