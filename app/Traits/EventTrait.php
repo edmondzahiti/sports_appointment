@@ -72,49 +72,48 @@ trait EventTrait
 
         if (now() > $data['date'] && empty($data['isEditingEvent'])) {
             return response()->json('failed');
-        } else {
-
-            $workingHours = [];
-            for ($x = 1; $x < 24; $x++) {
-                if ($x < 10) {
-                    $x = 0 . $x;
-                }
-                $workingHours [] = $x;
-            }
-
-            if (!empty($data['isEditingEvent'])) {
-                $activeEvents = Event::whereYear('start_time', $year)
-                    ->where('id', '!=', $data['event_id'])
-                    ->whereMonth('start_time', $month)
-                    ->whereDay('start_time', $day)
-                    ->where('field_id', $data['field_id'])
-                    ->get();
-            } else {
-                $activeEvents = Event::whereYear('start_time', $year)
-                    ->whereMonth('start_time', $month)
-                    ->whereDay('start_time', $day)
-                    ->where('field_id', $data['field_id'])->get();
-            }
-
-
-            $busyEvents = [];
-            foreach ($activeEvents as $activeEvent) {
-                $busyEvents [] = ($activeEvent->start_time)->format('H');
-            }
-
-            $freeEvents = [];
-            foreach ($workingHours as $workingHour) {
-                if (in_array($workingHour, $busyEvents)) {
-                    unset($workingHour);
-                } else {
-                    $freeEvents [] = [
-                        'start_time' => $workingHour,
-                        'end_time' => $workingHour + 1,
-                    ];
-                }
-            }
-            return response()->json($freeEvents);
         }
+
+        $workingHours = [];
+        for ($x = 1; $x < 24; $x++) {
+            if ($x < 10) {
+                $x = 0 . $x;
+            }
+            $workingHours [] = $x;
+        }
+
+        if (!empty($data['isEditingEvent'])) {
+            $activeEvents = Event::whereYear('start_time', $year)
+                ->where('id', '!=', $data['event_id'])
+                ->whereMonth('start_time', $month)
+                ->whereDay('start_time', $day)
+                ->where('field_id', $data['field_id'])
+                ->get();
+        } else {
+            $activeEvents = Event::whereYear('start_time', $year)
+                ->whereMonth('start_time', $month)
+                ->whereDay('start_time', $day)
+                ->where('field_id', $data['field_id'])->get();
+        }
+
+
+        $busyEvents = [];
+        foreach ($activeEvents as $activeEvent) {
+            $busyEvents [] = ($activeEvent->start_time)->format('H');
+        }
+
+        $freeEvents = [];
+        foreach ($workingHours as $workingHour) {
+            if (in_array($workingHour, $busyEvents)) {
+                unset($workingHour);
+            } else {
+                $freeEvents [] = [
+                    'start_time' => $workingHour,
+                    'end_time' => $workingHour + 1,
+                ];
+            }
+        }
+        return response()->json($freeEvents);
     }
 
     /**

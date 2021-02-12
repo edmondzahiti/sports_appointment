@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="353dc4aa-b0c3-489a-be33-bf38326a99c0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sports_appointment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sports_appointment.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/FieldsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/FieldsTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/fields/includes/actions.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/fields/includes/actions.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/StoreUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/StoreUserRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateUserProfileRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateUserProfileRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/Admin/EventRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Admin/EventRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Traits/EventTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/EventTrait.php" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,9 +18,7 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="Git.Settings">
     <favorite-branches>
@@ -148,37 +150,33 @@
   </component>
   <component name="ProjectId" id="1i4GgmLUTMDiAqCuu28ZZM496X1" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/database/factories" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\sports_appointment\database\factories" />
       <recent name="C:\laragon\www\sports_appointment\tests" />
+      <recent name="C:\laragon\www\sports_appointment\database\factories" />
       <recent name="C:\laragon\www\sports_appointment\tests\Feature" />
       <recent name="C:\laragon\www\sports_appointment\app\Http\Requests" />
       <recent name="C:\laragon\www\sports_appointment\app\Repositories\Admin" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\sports_appointment\tests\Feature\Auth" />
       <recent name="C:\laragon\www\sports_appointment\app\Repositories\Admin" />
       <recent name="C:\laragon\www\sports_appointment\app\Models" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -186,6 +184,7 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -220,7 +219,14 @@
       <workItem from="1611940508168" duration="143000" />
       <workItem from="1612177944852" duration="27000" />
       <workItem from="1612451549518" duration="6714000" />
-      <workItem from="1612530839755" duration="17983000" />
+      <workItem from="1612530839755" duration="18130000" />
+      <workItem from="1612740695474" duration="3090000" />
+      <workItem from="1612878912444" duration="2163000" />
+      <workItem from="1612888382605" duration="1017000" />
+      <workItem from="1612890185945" duration="127000" />
+      <workItem from="1613058534897" duration="5812000" />
+      <workItem from="1613135561373" duration="15183000" />
+      <workItem from="1613152274184" duration="1324000" />
     </task>
     <task id="LOCAL-00001" summary="added procfile">
       <created>1601645731794</created>
@@ -320,24 +326,30 @@
       <option name="project" value="LOCAL" />
       <updated>1612548217333</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="small fix">
+      <created>1612548960069</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1612548960069</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added procfile" />
@@ -345,5 +357,31 @@
     <MESSAGE value="dashboard fix" />
     <MESSAGE value="small fix" />
     <option name="LAST_COMMIT_MESSAGE" value="small fix" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="765" y="202" key="#com.intellij.ide.util.MemberChooser" timestamp="1613063597703">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="202" key="#com.intellij.ide.util.MemberChooser/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613063597703" />
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1613150032237">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613150032237" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1613061625699">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613061625699" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1613058881661">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613058881661" />
+    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1613149077567">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613149077567" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1613063684623">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613063684623" />
   </component>
 </project>

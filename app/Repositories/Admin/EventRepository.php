@@ -82,9 +82,7 @@ class EventRepository extends BaseRepository
             $userId = auth()->user()->id;
         }
 
-        $user = User::where('id', $userId)->first();
-
-        return $user;
+        return User::where('id', $userId)->first();
     }
 
     /**
@@ -161,9 +159,9 @@ class EventRepository extends BaseRepository
     {
         if (auth()->user()->isAdmin()) {
             return Event::get(['id', 'name', 'start_time', 'field_id', 'user_id']);
-        } else {
-            return Event::where('user_id', auth()->user()->id)->get(['id', 'name', 'start_time', 'field_id', 'user_id']);
         }
+
+        return Event::where('user_id', auth()->user()->id)->get(['id', 'name', 'start_time', 'field_id', 'user_id']);
     }
 
     /**
@@ -173,11 +171,11 @@ class EventRepository extends BaseRepository
     public function getFormattedDate($data)
     {
         $date = $data['day'];
-        $dateFormat = DateTime::createFromFormat('m-d-Y', $date)->format('Y-d-m');
-        $hour = $data['date'] . ':00:00';
-        $start_time = $dateFormat . ' ' . $hour;
+        $dateFormat = date('m/d/Y', strtotime($date));
 
-        return $start_time;
+        $hour = $data['date'] . ':00:00';
+
+        return $dateFormat . ' ' . $hour;
     }
 
     /**
