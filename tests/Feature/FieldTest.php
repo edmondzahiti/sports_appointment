@@ -3,22 +3,20 @@
 namespace Tests\Feature;
 
 use App\Models\Field\Field;
+use App\Traits\FieldTestInputs;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class FieldTest extends TestCase
 {
     use RefreshDatabase;
+    use FieldTestInputs;
 
     public function test_admin_can_create_field(): void
     {
         $this->signInAsAdmin();
-
-        $data = [
-            'name'      => 'field name',
-            'capacity'  => 30,
-        ];
+        $data = $this->getFieldValidInputs();
 
         $this->post(route('fields.store'), $data);
 
@@ -28,11 +26,7 @@ class FieldTest extends TestCase
     public function test_user_cannot_create_field(): void
     {
         $this->signInAsUser();
-
-        $data = [
-            'name'      => 'field name',
-            'capacity'  => 30,
-        ];
+        $data = $this->getFieldValidInputs();
 
         $this->post(route('fields.store'), $data)->assertStatus(302);
         self::assertCount(0, Field::all());
@@ -41,15 +35,8 @@ class FieldTest extends TestCase
     public function test_admin_can_update_field(): void
     {
         $this->signInAsAdmin();
-        $field = Field::create([
-            'name'      => 'field name',
-            'capacity'  => 30,
-        ]);
-
-        $data = [
-            'name'      => 'updatedField',
-            'capacity'  => 10,
-        ];
+        $field = factory(Field::class)->create();
+        $data = $this->getFieldValidInputs();
 
         $this->put(route('fields.update', $field->id), $data);
 
@@ -62,15 +49,8 @@ class FieldTest extends TestCase
     public function test_user_cannot_update_field(): void
     {
         $this->signInAsUser();
-        $field = Field::create([
-            'name'      => 'field name',
-            'capacity'  => 30,
-        ]);
-
-        $data = [
-            'name'      => 'updatedField',
-            'capacity'  => 10,
-        ];
+        $field = factory(Field::class)->create();
+        $data = $this->getFieldValidInputs();
 
         $this->put(route('fields.update', $field->id), $data)->assertStatus(302);
     }
@@ -78,11 +58,7 @@ class FieldTest extends TestCase
     public function test_admin_can_delete_field(): void
     {
         $this->signInAsAdmin();
-
-        $field = Field::create([
-            'name'      => 'field name',
-            'capacity'  => 30,
-        ]);
+        $field = factory(Field::class)->create();
 
         $this->delete(route('fields.destroy', $field->id));
 
@@ -92,11 +68,26 @@ class FieldTest extends TestCase
     public function test_user_cannot_delete_field(): void
     {
         $this->signInAsUser();
-        $field = Field::create([
-            'name'      => 'field name',
-            'capacity'  => 30,
-        ]);
+        $field = factory(Field::class)->create();
 
         $this->delete(route('fields.destroy', $field->id))->assertStatus(302);
+    }
+
+    public function test_valid_name_is_required()
+    {
+        $this->withoutExceptionHandling();
+        $data = $this->getFieldInvalidName();
+
+        $this->post(route('fields.store'), $data)
+            ->assertStatus(302);
+    }
+
+    public function test_valid_capacity_is_required()
+    {
+        $this->withoutExceptionHandling();
+        $data = $this->getFieldInvalidCapacity();
+
+        $this->post(route('fields.store'), $data)
+            ->assertStatus(302);
     }
 }

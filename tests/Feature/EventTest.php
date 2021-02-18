@@ -4,31 +4,20 @@ namespace Tests\Feature;
 
 use App\Models\Event\Event;
 use App\Models\Field\Field;
-use Carbon\Carbon;
+use App\Traits\EventTestInputs;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class EventTest extends TestCase
 {
     use RefreshDatabase;
+    use EventTestInputs;
 
     public function test_admin_can_create_event(): void
     {
-        $this->withoutExceptionHandling();
         $this->signInAsAdmin();
-
-        $field = Field::create([
-            'name'      => 'field name',
-            'capacity'  => 30,
-        ]);
-
-        $data = [
-            'hour'     => Carbon::tomorrow()->format('h'),
-            'date'     => Carbon::tomorrow()->format('Y-m-d'),
-            'field_id' => $field->id,
-            'user'     => auth()->user()->id,
-        ];
+        $field = factory(Field::class)->create();
+        $data = array_merge($this->getEventValidInputs(), ['field_id' => $field->id]);
 
         $this->post(route('events.store'), $data);
 
@@ -37,67 +26,46 @@ class EventTest extends TestCase
 
     public function test_user_can_create_event(): void
     {
-        $this->withoutExceptionHandling();
         $this->signInAsUser();
-
-        $field = Field::create([
-            'name'      => 'field name',
-            'capacity'  => 30,
-        ]);
-
-        $data = [
-            'hour'     => Carbon::tomorrow()->format('h'),
-            'date'     => Carbon::tomorrow()->format('Y-m-d'),
-            'field_id' => $field->id,
-            'user'     => auth()->user()->id,
-
-        ];
+        $field = factory(Field::class)->create();
+        $data = array_merge($this->getEventValidInputs(), ['field_id' => $field->id]);
 
         $this->post(route('events.store'), $data);
         self::assertCount(1, Event::all());
     }
 
-    public function test_admin_can_update_events(): void
+
+    public function test_admin_can_delete_event(): void
     {
         $this->signInAsAdmin();
+        $event = factory(Event::class)->create();
 
-        $field = Field::create([
-            'name'      => 'field name',
-            'capacity'  => 30,
-        ]);
+        $this->delete(route('events.destroy', $event->id));
 
-        $event = Event::create([
-            'name'       => 'name',
-            'end_time'   => Carbon::today()->format('Y-m-d'),
-            'start_time' => Carbon::today()->format('Y-m-d'),
-            'field_id'   => $field->id,
-            'user_id'    => auth()->user()->id,
-        ]);
-
-        $data = [
-            'start_time' => Carbon::tomorrow(),
-        ];
-
-        $this->put(route('events.update', $event->id), $data);
-
-        //check if data updated
-        $this->assertDatabaseHas('events', [
-            'start_time' => $data['start_time'],
-        ]);
+        self::assertCount(0, Event::all());
     }
 
-    public function test_user_cannot_update_other_users(): void
+    public function test_user_can_delete_his_event(): void
     {
         $this->signInAsUser();
-        $user = $this->getAdmin();
+        $event = factory(Event::class)->create();
 
-        $data = [
-            'name'              => 'updated name',
-            'surname'           => 'updated surname',
-            'email'             => 'updatedEmail@gmail.com',
-            'role'              => false
-        ];
+        $this->delete(route('events.destroy', $event->id));
 
-        $this->put(route('users.update', $user->id), $data)->assertStatus(302);
+        self::assertCount(0, Event::all());
     }
+
+    public function test_user_cannot_delete_other_events(): void
+    {
+        $this->signInAsUser();
+        $otherUser = $this->getAdmin();
+
+        $event = factory(Event::class)->create([
+            'user_id' => $otherUser->id,
+        ]);
+
+        $this->delete(route('events.destroy', $event->id))->assertStatus(302);
+    }
+
+
 }

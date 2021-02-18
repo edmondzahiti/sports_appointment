@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="353dc4aa-b0c3-489a-be33-bf38326a99c0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sports_appointment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sports_appointment.iml" afterDir="false" />
+    <list default="true" id="353dc4aa-b0c3-489a-be33-bf38326a99c0" name="Default Changelist" comment="unit tests &amp; fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/StoreUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/StoreUserRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateUserProfileRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateUserProfileRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/Admin/EventRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Admin/EventRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Traits/EventTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/EventTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/EventTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/EventTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/FieldTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/FieldTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/UserTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/UserTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,24 +154,24 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Traits" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\sports_appointment\tests" />
-      <recent name="C:\laragon\www\sports_appointment\database\factories" />
-      <recent name="C:\laragon\www\sports_appointment\tests\Feature" />
-      <recent name="C:\laragon\www\sports_appointment\app\Http\Requests" />
-      <recent name="C:\laragon\www\sports_appointment\app\Repositories\Admin" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\sports_appointment\tests\Feature\Auth" />
       <recent name="C:\laragon\www\sports_appointment\app\Repositories\Admin" />
       <recent name="C:\laragon\www\sports_appointment\app\Models" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\sports_appointment\app\Traits" />
+      <recent name="C:\laragon\www\sports_appointment\tests" />
+      <recent name="C:\laragon\www\sports_appointment\database\factories" />
+      <recent name="C:\laragon\www\sports_appointment\tests\Feature" />
+      <recent name="C:\laragon\www\sports_appointment\app\Http\Requests" />
     </key>
   </component>
   <component name="RunManager">
@@ -226,7 +222,8 @@
       <workItem from="1612890185945" duration="127000" />
       <workItem from="1613058534897" duration="5812000" />
       <workItem from="1613135561373" duration="15183000" />
-      <workItem from="1613152274184" duration="1324000" />
+      <workItem from="1613152274184" duration="1790000" />
+      <workItem from="1613664003468" duration="6492000" />
     </task>
     <task id="LOCAL-00001" summary="added procfile">
       <created>1601645731794</created>
@@ -333,7 +330,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612548960069</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="unit tests &amp; fixes">
+      <created>1613171693983</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1613171693983</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,17 +360,26 @@
     <MESSAGE value="db pgsql" />
     <MESSAGE value="dashboard fix" />
     <MESSAGE value="small fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="small fix" />
+    <MESSAGE value="unit tests &amp; fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="unit tests &amp; fixes" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="705" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1613668406927">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="705" y="322" key="#com.intellij.fileTypes.FileTypeChooser/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613668406927" />
     <state x="765" y="202" key="#com.intellij.ide.util.MemberChooser" timestamp="1613063597703">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="202" key="#com.intellij.ide.util.MemberChooser/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613063597703" />
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1613150032237">
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1613669430236">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613150032237" />
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613669430236" />
+    <state x="585" y="90" key="CommitChangelistDialog2" timestamp="1613667816471">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="585" y="90" key="CommitChangelistDialog2/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613667816471" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1613061625699">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -375,13 +388,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613058881661" />
+    <state x="552" y="240" key="Vcs.Push.Dialog.v2" timestamp="1613171817700">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="240" key="Vcs.Push.Dialog.v2/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613171817700" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1613149077567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613149077567" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1613063684623">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1613669345569">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613063684623" />
+    <state x="616" y="240" key="run.anything.popup/1920.-113.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1613669345569" />
   </component>
 </project>

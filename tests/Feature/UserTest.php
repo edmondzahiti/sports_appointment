@@ -3,28 +3,20 @@
 namespace Tests\Feature;
 
 use App\Models\User\User;
+use App\Traits\UserTestInputs;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
 
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
     use RefreshDatabase;
+    use UserTestInputs;
 
     public function test_admin_can_create_user(): void
     {
         $this->signInAsAdmin();
-
-        $data = [
-            'name'              => 'test name',
-            'surname'           => 'testsurname',
-            'username'          => 'test username',
-            'email'             => 'test@gmail.com',
-            'email_verified_at' => today(),
-            'password'          => Hash::make('password'),
-            'is_admin'          => false
-        ];
+        $data = $this->getUserValidInputs();
 
         $this->post(route('users.store'), $data);
 
@@ -37,16 +29,7 @@ class UserTest extends TestCase
     public function test_user_cannot_create_user(): void
     {
         $this->signInAsUser();
-
-        $data = [
-            'name'              => 'test name',
-            'surname'           => 'testsurname',
-            'username'          => 'test username',
-            'email'             => 'test@gmail.com',
-            'email_verified_at' => today(),
-            'password'          => Hash::make('password'),
-            'is_admin'          => false
-        ];
+        $data = $this->getUserValidInputs();
 
         $this->post(route('users.store'), $data)->assertStatus(302);
     }
@@ -56,12 +39,7 @@ class UserTest extends TestCase
         $this->signInAsAdmin();
         $user = $this->getUser();
 
-        $data = [
-            'name'              => 'updated name',
-            'surname'           => 'updated surname',
-            'email'             => 'updatedEmail@gmail.com',
-            'role'              => false
-        ];
+        $data = $this->getUserUpdatedInputs();
 
         $this->put(route('users.update', $user->id), $data);
 
@@ -76,12 +54,7 @@ class UserTest extends TestCase
         $this->signInAsUser();
         $user = $this->getAdmin();
 
-        $data = [
-            'name'              => 'updated name',
-            'surname'           => 'updated surname',
-            'email'             => 'updatedEmail@gmail.com',
-            'role'              => false
-        ];
+        $data = $this->getUserUpdatedInputs();
 
         $this->put(route('users.update', $user->id), $data)->assertStatus(302);
     }
@@ -91,11 +64,7 @@ class UserTest extends TestCase
         $user = $this->getUser();
         $this->actingAs($user);
 
-        $data = [
-            'name'              => 'updated name',
-            'surname'           => 'updated surname',
-            'email'             => 'updatedEmail@gmail.com',
-        ];
+        $data = $this->getUserUpdatedInputs();
 
         $this->put(route('profile.update', $user), $data);
 
@@ -122,6 +91,33 @@ class UserTest extends TestCase
         $user = $this->getAdmin();
 
         $this->delete(route('users.destroy', $user->id))->assertStatus(302);
+    }
+
+    public function test_valid_name_is_required()
+    {
+        $this->withoutExceptionHandling();
+        $data = $this->getFieldInvalidName();
+
+        $this->post(route('fields.store'), $data)
+            ->assertStatus(302);
+    }
+
+    public function test_valid_surname_is_required()
+    {
+        $this->withoutExceptionHandling();
+        $data = $this->getFieldInvalidSurname();
+
+        $this->post(route('fields.store'), $data)
+            ->assertStatus(302);
+    }
+
+    public function test_valid_email_is_required()
+    {
+        $this->withoutExceptionHandling();
+        $data = $this->getFieldInvalidEmail();
+
+        $this->post(route('fields.store'), $data)
+            ->assertStatus(302);
     }
 
 }
